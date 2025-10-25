@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import 'bootstrap/dist/css/bootstrap.min.css';
-import Davido from "../../images/davido.jpg";
+// import Davido from "../../images/davido.jpg";
 </script>
 
 <template>

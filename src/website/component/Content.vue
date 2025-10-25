@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref } from 'vue';
+// import { ref } from 'vue';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Davido from '../../images/davido.jpg';
 </script>

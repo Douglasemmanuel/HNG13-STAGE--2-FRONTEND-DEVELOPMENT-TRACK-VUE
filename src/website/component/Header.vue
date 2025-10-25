@@ -6,9 +6,9 @@ import LOGO from '../../images/logo2.jpeg'; // Make sure path is correct
 const isOpen = ref(false);
 const isMobile = ref(window.innerWidth < 768);
 // Function to toggle the mobile menu
-const toggleMenu = () => {
-  isOpen.value = !isOpen.value;
-};
+// const toggleMenu = () => {
+//   isOpen.value = !isOpen.value;
+// };
 const handleResize = () => {
   isMobile.value = window.innerWidth < 768;
   if (!isMobile.value) isOpen.value = false; 
