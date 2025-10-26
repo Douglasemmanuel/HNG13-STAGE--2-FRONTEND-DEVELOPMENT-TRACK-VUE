@@ -8,4 +8,3 @@ import Home from './website/screen/Home.vue';
 </div>
 
 </template>
-
