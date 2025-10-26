@@ -8,7 +8,10 @@ import Davido from '../../images/davido.jpg';
   <div class="container py-5">
     <div class="row justify-content-center">
       <div class="col-12 col-md-10">
-
+            <b-breadcrumb class="mb-4">
+        <b-breadcrumb-item href="#">Concerts |</b-breadcrumb-item>
+        <b-breadcrumb-item active> Davido</b-breadcrumb-item>
+    </b-breadcrumb>
         <!-- Image Card -->
         <div class="card mb-4">
           <img
