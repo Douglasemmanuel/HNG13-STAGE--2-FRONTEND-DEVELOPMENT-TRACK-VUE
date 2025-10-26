@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref , onMounted , onUnmounted } from 'vue';
 import LOGO from '../../images/logo2.jpeg'; // Make sure path is correct
-
+import { useRoute , useRouter } from 'vue-router';
 // This is like React's useState(false)
 const isOpen = ref(false);
 const isMobile = ref(window.innerWidth < 768);
@@ -9,6 +9,11 @@ const isMobile = ref(window.innerWidth < 768);
 // const toggleMenu = () => {
 //   isOpen.value = !isOpen.value;
 // };
+const route = useRoute();
+const router = useRouter();
+function navigateTo(route: string) {
+  router.push(route);
+}
 const handleResize = () => {
   isMobile.value = window.innerWidth < 768;
   if (!isMobile.value) isOpen.value = false; 
@@ -36,12 +41,13 @@ onUnmounted(() => {
     <b-container class="d-flex justify-content-between align-items-center">
 
       <!-- LOGO -->
+       <router-link to="/" style="text-decoration: none;">
       <b-navbar-brand class="d-flex align-items-center" style="cursor: pointer">
         <!-- <b-img :src="LOGO" height="32" class="me-2" alt="Logo" /> -->
          <img :src="LOGO" height="32" class="me-2" alt="Logo" />
         <span class="fw-medium text-dark">TicketHub</span>
       </b-navbar-brand>
-
+      </router-link>
       <!-- DESKTOP NAV LINKS -->
       <b-nav class="mx-auto d-none d-md-flex align-items-center">
         <b-nav-item href="#" class="text-dark px-3 py-2 rounded hover-bg">Home</b-nav-item>
@@ -53,10 +59,10 @@ onUnmounted(() => {
       <!-- DESKTOP BUTTONS -->
       <div v-if="!isMobile"  class="d-none d-md-flex align-items-center mt-2">
         <b-nav class="d-flex gap-2">
-          <b-button variant="outline-primary" class="login-btn px-4 py-2 fw-semibold">
+          <b-button variant="outline-primary" class="login-btn px-4 py-2 fw-semibold"   @click="navigateTo('/login')">
             Login
           </b-button>
-          <b-button variant="primary" class="get-started-btn px-4 py-2 fw-semibold">
+          <b-button variant="primary" class="get-started-btn px-4 py-2 fw-semibold"   @click="navigateTo('/register')">
             Get Started
           </b-button>
         </b-nav>
@@ -86,10 +92,10 @@ onUnmounted(() => {
 
   <!-- MOBILE BUTTONS -->
   <div class="d-flex flex-column gap-2 mr-5 ">
-    <b-button variant="outline-primary" class="login-btn px-4 py-2 fw-semibold w-100">
+    <b-button variant="outline-primary" class="login-btn px-4 py-2 fw-semibold w-100"   @click="navigateTo('/login')">
       Login
     </b-button>
-    <b-button variant="primary" class="get-started-btn px-4 py-2 fw-semibold w-100">
+    <b-button variant="primary" class="get-started-btn px-4 py-2 fw-semibold w-100"   @click="navigateTo('/register')">
       Get Started
     </b-button>
   </div>

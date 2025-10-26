@@ -2,6 +2,12 @@
 // import { ref } from 'vue';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Davido from '../../images/davido.jpg';
+import { useRoute , useRouter } from 'vue-router';
+const route = useRoute();
+const router = useRouter();
+function navigateTo(route: string) {
+  router.push(route);
+}
 </script>
 
 <template>
@@ -10,7 +16,7 @@ import Davido from '../../images/davido.jpg';
       <div class="col-12 col-md-10">
             <b-breadcrumb class="mb-4">
         <b-breadcrumb-item href="#">Concerts |</b-breadcrumb-item>
-        <b-breadcrumb-item active> Davido</b-breadcrumb-item>
+        <b-breadcrumb-item active>Davido</b-breadcrumb-item>
     </b-breadcrumb>
         <!-- Image Card -->
         <div class="card mb-4">
@@ -46,7 +52,7 @@ import Davido from '../../images/davido.jpg';
         </p>
 
         <!-- Buy Button -->
-        <button class="btn btn-primary btn-lg">
+        <button class="btn btn-primary btn-lg" @click="navigateTo('/register')">
           Create Tickets
         </button>
 

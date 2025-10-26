@@ -9,16 +9,20 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@iconify/vue": "^5.0.0",
     "@iconoir/vue": "^7.11.0",
     "@kalimahapps/vue-icons": "^1.9.5",
+    "@vee-validate/zod": "^4.15.1",
     "bootstrap": "^5.3.8",
     "bootstrap-icons": "^1.13.1",
     "bootstrap-vue-3": "^0.5.1",
+    "vee-validate": "^4.15.1",
     "vue": "^3.5.22",
     "vue-bootstrap-icons": "^0.2.4",
     "vue-router": "^4.0.13",
     "vue-toastify": "^2.1.0",
     "vue-zustand": "^1.1.0",
+    "zod": "^3.25.76",
     "zustand": "^5.0.8"
   },
   "devDependencies": {

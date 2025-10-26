@@ -3,10 +3,10 @@ import { createApp } from 'vue'
 import App from './App.vue'
 import { createRouter, createWebHistory } from 'vue-router';
 import type { RouteRecordRaw } from 'vue-router';
-import Registerscreen from './Webapp/views/Register.vue';
+import Register from './Webapp/views/Register.vue';
 import Home from './website/screen/Home.vue';
-import Loginscreen from './Webapp/views/Login.vue';
-
+import Login from './Webapp/views/Login.vue';
+import Dashboard from './Webapp/modules/dashboard/component/Dashboard.vue';
 import 'bootstrap'
 import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap-vue-3/dist/bootstrap-vue-3.css';
@@ -14,14 +14,15 @@ import 'bootstrap-icons/font/bootstrap-icons.css';
 
 // Correctly type your routes
 const routes: RouteRecordRaw[] = [
-    { path: '/', component: Home },        // lowercase 'component'
-    { path: '/login', component: Loginscreen },
-    { path: '/register', component: Registerscreen },
+    { path: '/', component: Home },        
+    { path: '/login', component: Login },
+    { path: '/register', component: Register },
+    { path: '/dashboard', component: Dashboard},
 ];
 
 const router = createRouter({
     history: createWebHistory(),
-    routes,  // TypeScript now recognizes this correctly
+    routes,  
 });
 
 const app = createApp(App);
