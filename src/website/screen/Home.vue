@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import Header from '../component/Header.vue';
 import Footer from '../component/Footer.vue';
-import Content from '../component/Content.vue';
+
 import Main from '../component/Main.vue';
 
 </script>
@@ -13,7 +13,7 @@ import Main from '../component/Main.vue';
           <Header></Header>
           <div className="mt-4"></div>
       <Main></Main>
-      <Content/>
+   
       </main>
         <Footer></Footer>
     </div>

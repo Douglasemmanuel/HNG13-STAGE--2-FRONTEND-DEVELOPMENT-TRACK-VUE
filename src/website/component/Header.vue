@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref , onMounted , onUnmounted } from 'vue';
-import LOGO from '../../images/logo2.jpeg'; // Make sure path is correct
+import logo from '../../images/logo2.jpeg'; // Make sure path is correct
 import { useRoute , useRouter } from 'vue-router';
 // This is like React's useState(false)
 const isOpen = ref(false);
@@ -44,7 +44,12 @@ onUnmounted(() => {
        <router-link to="/" style="text-decoration: none;">
       <b-navbar-brand class="d-flex align-items-center" style="cursor: pointer">
         <!-- <b-img :src="LOGO" height="32" class="me-2" alt="Logo" /> -->
-         <img :src="LOGO" height="32" class="me-2" alt="Logo" />
+         <!-- <img :src="logo" height="32" class="me-2" alt="Logo" /> -->
+          <img 
+        :src="logo" 
+        alt="Ticket Icon" 
+        class="image-style"
+      />
         <span class="fw-medium text-dark">TicketHub</span>
       </b-navbar-brand>
       </router-link>
@@ -144,5 +149,11 @@ onUnmounted(() => {
 .get-started-btn:hover {
   background: linear-gradient(90deg, #007bff, #0a58ca);
   transform: translateY(-1px);
+}
+.image-style {
+  width: 60px;           
+  height: auto;    
+  margin-left: 1rem;       
+
 }
 </style>

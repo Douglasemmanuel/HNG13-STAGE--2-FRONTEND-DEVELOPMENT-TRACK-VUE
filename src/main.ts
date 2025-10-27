@@ -6,18 +6,27 @@ import type { RouteRecordRaw } from 'vue-router';
 import Register from './Webapp/views/Register.vue';
 import Home from './website/screen/Home.vue';
 import Login from './Webapp/views/Login.vue';
-import Dashboard from './Webapp/modules/dashboard/component/Dashboard.vue';
 import 'bootstrap'
 import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap-vue-3/dist/bootstrap-vue-3.css';
 import 'bootstrap-icons/font/bootstrap-icons.css';
+import Maindash from  './Webapp/modules/dashboard/Maindash.vue';
+import CreateTickets from './Webapp/modules/dashboard/CreateTickets.vue';
+import EditTickets from './Webapp/modules/dashboard/EditTickets.vue';
+import Activetickets from './Webapp/modules/dashboard/Activetickets.vue';
+import AllTickets from './Webapp/modules/dashboard/AllTickets.vue';
+import { createPinia } from 'pinia';
 
 // Correctly type your routes
 const routes: RouteRecordRaw[] = [
     { path: '/', component: Home },        
     { path: '/login', component: Login },
     { path: '/register', component: Register },
-    { path: '/dashboard', component: Dashboard},
+    { path: '/dashboard', component: Maindash},
+    { path: '/all-tickets', component: AllTickets },
+    { path: '/active-tickets', component: Activetickets },
+    { path: '/create-ticket', component: CreateTickets},
+     { path: '/edit-ticket/:id', component: EditTickets , props:true},
 ];
 
 const router = createRouter({
@@ -27,5 +36,6 @@ const router = createRouter({
 
 const app = createApp(App);
 app.use(router);
+app.use(createPinia());
 // app.use(BootstrapVue3);
 app.mount('#app');

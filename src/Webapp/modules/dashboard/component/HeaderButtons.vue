@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { Icon } from '@iconify/vue'
-
 interface CardProps {
   label: string
   value: number | string
@@ -14,28 +13,28 @@ const cardData: CardProps[] = [
   {
     label: 'Total Tickets',
     value: 100,
-    icon: 'fa-solid:ticket-alt',
+    icon: "fa-solid:ticket-alt",
     iconColor: '#6c757d',
     iconBackgroundColor: '#e9ecef'
   },
   {
     label: 'Open Tickets',
     value: 55,
-    icon: 'fa-solid:envelope-open',
+    icon: "material-symbols:pending-actions",
     iconColor: '#28a745',
     iconBackgroundColor: '#d4edda'
   },
   {
     label: 'Resolved Tickets',
     value: 30,
-    icon: 'fa-solid:check-circle',
+    icon: "mdi:check-circle-outline",
     iconColor: '#6c757d',
     iconBackgroundColor: '#e9ecef'
   },
   {
     label: 'Escalated Tickets',
     value: 15,
-    icon: 'fa6-solid:triangle-exclamation',
+    icon: "fa-solid:spinner",
     iconColor: '#ffc107',
     iconBackgroundColor: '#fff8e1'
   }
@@ -84,13 +83,14 @@ const cardData: CardProps[] = [
   justify-content: space-between;
   align-items: center;
   gap: 2rem;
-  border: 2px solid;
+  border: none;
   border-radius: 8px;
   padding: 10px;
   width: 250px;
   text-align: center;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
   margin: 16px 0;
+  cursor: pointer;
 }
 
 .card-text {
@@ -115,7 +115,7 @@ const cardData: CardProps[] = [
   justify-content: center;
   width: 60px;
   height: 60px;
-  border: 2px solid;
+  border: none;
   border-radius: 12px;
   cursor: pointer;
 }
