@@ -11,7 +11,7 @@ import Main from '../component/Main.vue';
     <div className="d-flex flex-column min-vh-100">
       <main className="flex-grow-1">
           <Header></Header>
-          <div className="mt-4"></div>
+          <div className="mt-3"></div>
       <Main></Main>
    
       </main>

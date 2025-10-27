@@ -62,7 +62,7 @@ onUnmounted(() => {
       </b-nav>
 
       <!-- DESKTOP BUTTONS -->
-      <div v-if="!isMobile"  class="d-none d-md-flex align-items-center mt-2">
+      <div v-if="!isMobile"  class="d-none d-md-flex align-items-center mt-2  mr-4 md:mr-6 lg:mr-8">
         <b-nav class="d-flex gap-2">
           <b-button variant="outline-primary" class="login-btn px-4 py-2 fw-semibold"   @click="navigateTo('/login')">
             Login
@@ -126,6 +126,10 @@ onUnmounted(() => {
   border-radius: 8px;
   transition: all 0.3s ease;
   cursor: pointer;
+   padding: 6px 10px; 
+  /* padding: 2rem; */
+  margin-right: 2rem;
+  
 }
 
 /* Login button */
