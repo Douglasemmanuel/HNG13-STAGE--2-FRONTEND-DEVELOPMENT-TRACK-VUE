@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref , onMounted , onUnmounted } from 'vue';
 import logo from '../../images/logo2.jpeg'; // Make sure path is correct
-import { useRoute , useRouter } from 'vue-router';
+import { useRouter } from 'vue-router';
 // This is like React's useState(false)
 const isOpen = ref(false);
 const isMobile = ref(window.innerWidth < 768);
