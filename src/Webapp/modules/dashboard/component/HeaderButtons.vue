@@ -1,5 +1,7 @@
 <script setup lang="ts">
 import { Icon } from '@iconify/vue'
+import { computed } from 'vue'
+import { useTicketStore } from '../store/ticketstore'
 interface CardProps {
   label: string
   value: number | string
@@ -7,37 +9,44 @@ interface CardProps {
   iconColor?: string
   iconBackgroundColor?: string
 }
+const ticketStore = useTicketStore();
 
+// Compute ticket counts
+const openCount = computed(() => ticketStore.tickets.filter(ticket => ticket.status === "Open").length);
+const resolvedCount = computed(() => ticketStore.tickets.filter(ticket => ticket.status === "In Progress").length);
+const closedCount = computed(() => ticketStore.tickets.filter(ticket => ticket.status === "Closed").length);
+const total = computed(() => ticketStore.tickets.length)
 // Card data array must be defined **before the template**
 const cardData: CardProps[] = [
   {
-    label: 'Total Tickets',
-    value: 100,
+    label: 'Total ',
+    value: total.value,
     icon: "fa-solid:ticket-alt",
     iconColor: '#6c757d',
     iconBackgroundColor: '#e9ecef'
   },
   {
-    label: 'Open Tickets',
-    value: 55,
+    label: 'Open ',
+    value: openCount.value,
     icon: "material-symbols:pending-actions",
     iconColor: '#28a745',
     iconBackgroundColor: '#d4edda'
   },
   {
+    label: 'In Progress',
+    value: resolvedCount.value,
+    icon: "fa-solid:spinner",
+    iconColor: '#ffc107',
+    iconBackgroundColor: '#fff8e1'
+  },
+  {
     label: 'Resolved Tickets',
-    value: 30,
+    value: closedCount.value,
     icon: "mdi:check-circle-outline",
     iconColor: '#6c757d',
     iconBackgroundColor: '#e9ecef'
   },
-  {
-    label: 'Escalated Tickets',
-    value: 15,
-    icon: "fa-solid:spinner",
-    iconColor: '#ffc107',
-    iconBackgroundColor: '#fff8e1'
-  }
+  
 ]
 </script>
 
@@ -49,8 +58,7 @@ const cardData: CardProps[] = [
       class="card"
       :style="{ borderColor: card.iconColor }"
     >
-    <div class="big-container">
-          <div class="card-text">
+      <div class="card-text">
         <p class="card-label">{{ card.label }}</p>
         <p class="card-value" :style="{ color: card.iconColor }">{{ card.value }}</p>
       </div>
@@ -61,16 +69,10 @@ const cardData: CardProps[] = [
         <Icon :icon="card.icon" width="25" height="25" :color="card.iconColor" />
       </div>
     </div>
-    </div>
   </div>
 </template>
 
 <style scoped>
-.big-container{
-    display: flex;
-    gap:1rem;
-    flex-wrap: wrap;
-}
 .cards-container {
   display: flex;
   flex-wrap: wrap;
@@ -80,23 +82,23 @@ const cardData: CardProps[] = [
 
 .card {
   display: flex;
-  justify-content: space-between;
+  flex-direction: row;
+  justify-content: space-between; 
   align-items: center;
-  gap: 2rem;
   border: none;
   border-radius: 8px;
   padding: 10px;
   width: 250px;
-  text-align: center;
+  text-align: left;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-  margin: 16px 0;
+  margin: 14px 0;
   cursor: pointer;
 }
 
 .card-text {
   display: flex;
   flex-direction: column;
-  align-items: center;
+ 
 }
 
 .card-label {
@@ -110,13 +112,11 @@ const cardData: CardProps[] = [
 }
 
 .card-icon {
-  display: inline-flex;
+  display: flex;
   align-items: center;
   justify-content: center;
   width: 60px;
   height: 60px;
-  border: none;
   border-radius: 12px;
-  cursor: pointer;
 }
 </style>

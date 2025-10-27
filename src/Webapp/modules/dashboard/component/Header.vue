@@ -18,8 +18,8 @@ const handleLogout = () => {
 
 // Optional: full name for display
 const displayName = computed(() => {
-    return 'Emmanuel'
-  // return  `${currentUser.value?.lastName} ${currentUser.value?.lastName}` 
+    // return 'Emmanuel'
+  return  `${currentUser.value?.firstName} ${currentUser.value?.lastName}` 
 });
 </script>
 

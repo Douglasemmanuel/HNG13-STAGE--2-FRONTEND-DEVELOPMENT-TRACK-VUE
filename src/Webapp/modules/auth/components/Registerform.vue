@@ -1,11 +1,88 @@
 <script setup lang="ts">
-// No script logic needed
-import { useRoute , useRouter } from 'vue-router';
-const route = useRoute();
+import { ref, reactive } from 'vue';
+import { useRouter } from 'vue-router';
+import { toast, type ToastOptions } from 'vue3-toastify';
+import { useSignup , type SignupData  } from '../hooks/register_hook';
 const router = useRouter();
-function navigateTo(route: string) {
-  router.push(route);
-}
+const email = ref('');
+const password = ref('');
+const confirmPassword = ref('');
+const firstName = ref('');
+const lastName = ref('');
+const { signup } = useSignup();
+const errors = reactive<{ [key: string]: string | undefined }>({});
+
+const handleSubmit = async () => {
+  // Clear previous errors
+  errors.email = undefined;
+  errors.password = undefined;
+  errors.confirmPassword = undefined;
+  errors.firstName = undefined;
+  errors.lastName = undefined;
+
+  // Validate fields
+  if (!firstName.value.trim()) {
+    errors.firstName = 'First Name is required';
+    return;
+  }
+  if (!lastName.value.trim()) {
+    errors.lastName = 'Last Name is required';
+    return;
+  }
+  if (!email.value.trim()) {
+    errors.email = 'Email is required';
+    return;
+  } else if (!/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(email.value)) {
+    errors.email = 'Invalid email format';
+    return;
+  }
+  if (!password.value.trim()) {
+    errors.password = 'Password is required';
+    return;
+  }else if(password.value.length < 6){
+    errors.password = 'Password is too Short';
+  }
+  if (password.value !== confirmPassword.value) {
+    errors.confirmPassword = 'Passwords do not match';
+    return;
+  }
+ const existingUsers = localStorage.getItem('users');
+  const users: SignupData[] = existingUsers ? JSON.parse(existingUsers) : [];
+  const userExists = users.some(user => user.email === email.value);
+
+  if (userExists) {
+    errors.email = 'Email is already registered';
+    toast("User with this Email exists", {
+      autoClose: 5000,
+      position: toast.POSITION.TOP_RIGHT,
+    } as ToastOptions);
+    return;
+  }
+  const data:SignupData = {
+    firstName: firstName.value,
+    lastName: lastName.value,
+    email: email.value,
+    password: password.value,
+    confirmPassword: confirmPassword.value,
+  };
+
+  const result = signup(data);
+
+  if (result.success) {
+    toast("Registration successful!", {
+      autoClose: 5000,
+      position: toast.POSITION.TOP_RIGHT,
+    } as ToastOptions);
+    router.push('/dashboard');
+  } else {
+    errors.email = result.message;
+     errors.firstName = result.message;
+      errors.lastName = result.message;
+       errors.password = result.message;
+        errors.confirmPassword = result.message;
+  }
+  
+};
 </script>
 
 <template>
@@ -14,7 +91,7 @@ function navigateTo(route: string) {
 
     <div class="row justify-content-center mt-4">
       <div class="col-12 col-sm-10 col-md-6 col-lg-4">
-        <form>
+        <form @submit.prevent="handleSubmit">
           <div class="row mb-3">
             <div class="col-12 col-sm-6 mb-2 mb-sm-0">
               <label for="firstName" class="form-label">First Name</label>
@@ -23,7 +100,9 @@ function navigateTo(route: string) {
                 type="text"
                 class="form-control"
                 placeholder="First Name"
+                v-model="firstName"
               />
+                          <small v-if="errors.firstName" class="text-danger">{{ errors.firstName }}</small>
             </div>
             <div class="col-12 col-sm-6">
               <label for="lastName" class="form-label">Last Name</label>
@@ -32,7 +111,9 @@ function navigateTo(route: string) {
                 type="text"
                 class="form-control"
                 placeholder="Last Name"
+                v-model="lastName"
               />
+                          <small v-if="errors.lastName" class="text-danger">{{ errors.lastName }}</small>
             </div>
           </div>
 
@@ -43,7 +124,9 @@ function navigateTo(route: string) {
               type="email"
               class="form-control"
               placeholder="Enter email"
+              v-model="email"
             />
+                        <small v-if="errors.email" class="text-danger">{{ errors.email }}</small>
           </div>
 
           <div class="mb-3">
@@ -53,7 +136,9 @@ function navigateTo(route: string) {
               type="password"
               class="form-control"
               placeholder="Enter password"
+              v-model="password"
             />
+                        <small v-if="errors.password" class="text-danger">{{ errors.password}}</small>
           </div>
 
           <div class="mb-3">
@@ -63,7 +148,9 @@ function navigateTo(route: string) {
               type="password"
               class="form-control"
               placeholder="Confirm password"
+              v-model="confirmPassword"
             />
+             <small v-if="errors.confirmPassword" class="text-danger">{{ errors.confirmPassword}}</small>
           </div>
 
           <button type="submit" class="btn btn-primary w-100 py-2">

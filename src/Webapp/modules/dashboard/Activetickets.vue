@@ -1,26 +1,15 @@
 <script lang="ts" setup>
-import { ref, computed } from 'vue';
+import { computed } from 'vue';
 import { useRouter } from 'vue-router';
-
-interface Ticket {
-  id: number;
-  title: string;
-  description: string;
-  assignee: string;
-  status: string;
-}
+import {useTicketStore} from '../dashboard/store/ticketstore';
 
 const router = useRouter();
+const ticketStore = useTicketStore();
+const tickets = ticketStore.tickets;
 
-const tickets = ref<Ticket[]>([
-  { id: 1, title: 'Fix login bug', description: 'Users cannot login with Google', assignee: 'John', status: 'Open' },
-  { id: 2, title: 'Update dashboard', description: 'Add chart for active users', assignee: 'Jane', status: 'In Progress' },
-  { id: 3, title: 'Email notifications', description: 'Send notifications for new tickets', assignee: 'Bob', status: 'Closed' },
-]);
-
-// Filter out closed tickets
-const activeTickets = computed(() => tickets.value.filter(ticket => ticket.status !== 'Closed'));
-
+const activeTickets = computed(() =>
+ tickets.filter(ticket => ticket.status !== 'Closed')
+);
 
 const goBack = () => {
   router.back();

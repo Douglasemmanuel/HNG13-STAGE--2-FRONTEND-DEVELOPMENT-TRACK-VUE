@@ -16,6 +16,8 @@ import EditTickets from './Webapp/modules/dashboard/EditTickets.vue';
 import Activetickets from './Webapp/modules/dashboard/Activetickets.vue';
 import AllTickets from './Webapp/modules/dashboard/AllTickets.vue';
 import { createPinia } from 'pinia';
+import Vue3Toastify, { type ToastContainerOptions } from 'vue3-toastify';
+import 'vue3-toastify/dist/index.css';
 
 // Correctly type your routes
 const routes: RouteRecordRaw[] = [
@@ -37,5 +39,12 @@ const router = createRouter({
 const app = createApp(App);
 app.use(router);
 app.use(createPinia());
+app.use(
+    Vue3Toastify,
+  {
+    autoClose: 3000,
+    // ...
+  } as ToastContainerOptions,
+);
 // app.use(BootstrapVue3);
 app.mount('#app');

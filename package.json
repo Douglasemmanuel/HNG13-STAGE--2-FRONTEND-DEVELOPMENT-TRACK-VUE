@@ -23,12 +23,14 @@
     "vue-router": "^4.0.13",
     "vue-toastify": "^2.1.0",
     "vue-zustand": "^1.1.0",
+    "vue3-toastify": "^0.2.8",
     "zod": "^3.25.76",
     "zustand": "^5.0.8"
   },
   "devDependencies": {
     "@types/node": "^24.6.0",
     "@vitejs/plugin-vue": "^6.0.1",
+    "@vue/compiler-sfc": "^3.5.22",
     "@vue/tsconfig": "^0.8.1",
     "typescript": "~5.9.3",
     "vite": "^7.1.7",

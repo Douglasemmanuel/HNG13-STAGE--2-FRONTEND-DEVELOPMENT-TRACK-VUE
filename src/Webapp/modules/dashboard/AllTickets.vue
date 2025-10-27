@@ -1,44 +1,35 @@
 <script lang="ts" setup>
-import { ref } from 'vue';
 import { useRouter } from 'vue-router';
+import {useTicketStore} from '../dashboard/store/ticketstore';
 
-interface Ticket {
-  id: number;
-  title: string;
-  description: string;
-  assignee: string;
-  status: string;
-}
 
 const router = useRouter();
+const ticketStore = useTicketStore();
+const tickets = ticketStore.tickets;
+// ✅ Use tickets directly from the store
 
-const tickets = ref<Ticket[]>([
-  { id: 1, title: 'Fix login bug', description: 'Users cannot login with Google', assignee: 'John', status: 'Open' },
-  { id: 2, title: 'Update dashboard', description: 'Add chart for active users', assignee: 'Jane', status: 'In Progress' },
-  { id: 3, title: 'Email notifications', description: 'Send notifications for new tickets', assignee: 'Bob', status: 'Closed' },
-]);
-
+// ✅ Delete using store method
 const handleDelete = (id: number) => {
   const confirmed = window.confirm('Are you sure you want to delete this ticket?');
-  if (!confirmed) return; // Stop if the user clicks "Cancel"
+  if (!confirmed) return;
 
-  tickets.value = tickets.value.filter(ticket => ticket.id !== id);
+  ticketStore.deleteTicket(id);
   console.log('Deleted ticket with id:', id);
 };
 
-
-const goBack = () => {
-  router.back();
-};
-
+// ✅ Edit navigation
 const editTicket = (id: number) => {
   router.push(`/edit-ticket/${id}`);
+};
+
+// ✅ Go back navigation
+const goBack = () => {
+  router.back();
 };
 </script>
 
 <template>
   <div class="container mt-5">
-    <!-- Header -->
     <div class="d-flex align-items-center justify-content-center position-relative mb-4">
       <button type="button" class="btn btn-primary btn-sm position-absolute start-0" @click="goBack">
         Back
@@ -46,7 +37,6 @@ const editTicket = (id: number) => {
       <h2 class="mb-0">All Tickets</h2>
     </div>
 
-    <!-- Ticket Table or Empty Message -->
     <div v-if="tickets.length === 0" class="text-center">
       No tickets available.
     </div>
@@ -72,22 +62,10 @@ const editTicket = (id: number) => {
             <td>{{ ticket.assignee }}</td>
             <td>{{ ticket.status }}</td>
             <td>
-              <button
-                type="button"
-                class="btn btn-warning btn-sm me-2"
-                @click="editTicket(ticket.id)"
-              >
-                Edit
-              </button>
+              <button class="btn btn-warning btn-sm me-2" @click="editTicket(ticket.id)">Edit</button>
             </td>
             <td>
-              <button
-                type="button"
-                class="btn btn-danger btn-sm"
-                @click="handleDelete(ticket.id)"
-              >
-                Delete
-              </button>
+              <button class="btn btn-danger btn-sm" @click="handleDelete(ticket.id)">Delete</button>
             </td>
           </tr>
         </tbody>
@@ -95,6 +73,7 @@ const editTicket = (id: number) => {
     </div>
   </div>
 </template>
+
 
 
 <style scoped>

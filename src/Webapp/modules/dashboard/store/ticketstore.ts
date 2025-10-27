@@ -9,47 +9,6 @@ export interface Ticket {
   status: 'Open' | 'In Progress' | 'Closed';
 }
 
-// export const useTicketStore = defineStore('ticket', () => {
-//   // Load tickets from localStorage or start with an empty array
-//   const tickets = ref<Ticket[]>(JSON.parse(localStorage.getItem('tickets') || '[]'));
-
-//   // Persist to localStorage whenever tickets change
-//   watch(
-//     tickets,
-//     (newTickets) => {
-//       localStorage.setItem('tickets', JSON.stringify(newTickets));
-//     },
-//     { deep: true }
-//   );
-
-//   // ✅ Add a new ticket
-//   const addTicket = (
-//     ticket: Omit<Ticket, 'id' | 'status'> & { status?: 'Open' | 'In Progress' | 'Closed' }
-//   ) => {
-//     tickets.value.push({
-//       id: Date.now(),
-//       status: ticket.status || 'Open',
-//       ...ticket,
-//     });
-//   };
-
-//   // ✅ Delete a ticket by ID
-//   const deleteTicket = (id: number) => {
-//     tickets.value = tickets.value.filter((t) => t.id !== id);
-//   };
-
-//   // ✅ Update a ticket by ID
-//   const updateTicket = (id: number, ticket: Omit<Ticket, 'id'>) => {
-//     const index = tickets.value.findIndex((t) => t.id === id);
-//     if (index !== -1) tickets.value[index] = { id, ...ticket };
-//   };
-
-//   // ✅ Get a ticket by ID
-//   const getTicket = (id: number) => tickets.value.find((t) => t.id === id);
-
-//   return { tickets, addTicket, deleteTicket, updateTicket, getTicket };
-// });
-
 
 export const useTicketStore = defineStore('ticket', () => {
   const tickets = ref<Ticket[]>(JSON.parse(localStorage.getItem('tickets') || '[]'));
@@ -58,7 +17,7 @@ export const useTicketStore = defineStore('ticket', () => {
     localStorage.setItem('tickets', JSON.stringify(newTickets));
   }, { deep: true });
 
-  const addTicket = (ticket: Omit<Ticket, 'id' | 'status' | 'purchaseDate'> & { status?: 'Open' | 'In Progress' | 'Closed' }) => {
+  const addTicket = (ticket: Omit<Ticket, 'id' | 'status' > & { status?: 'Open' | 'In Progress' | 'Closed' }) => {
     tickets.value.push({
       id: Date.now(),
       status: ticket.status || 'Open',
@@ -79,3 +38,7 @@ export const useTicketStore = defineStore('ticket', () => {
 
   return { tickets, addTicket, deleteTicket, updateTicket, getTicket };
 });
+
+
+
+
