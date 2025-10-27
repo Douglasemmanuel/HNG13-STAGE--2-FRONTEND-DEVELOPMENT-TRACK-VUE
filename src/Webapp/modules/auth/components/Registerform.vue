@@ -73,7 +73,7 @@ const handleSubmit = async () => {
       autoClose: 5000,
       position: toast.POSITION.TOP_RIGHT,
     } as ToastOptions);
-    router.push('/dashboard');
+    router.push('/login');
   } else {
     errors.email = result.message;
      errors.firstName = result.message;
