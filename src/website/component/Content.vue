@@ -2,8 +2,8 @@
 // import { ref } from 'vue';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Davido from '../../images/davido.jpg';
-import { useRoute , useRouter } from 'vue-router';
-const route = useRoute();
+import {  useRouter } from 'vue-router';
+
 const router = useRouter();
 function navigateTo(route: string) {
   router.push(route);

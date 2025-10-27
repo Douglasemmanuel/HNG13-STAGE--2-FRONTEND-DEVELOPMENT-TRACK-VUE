@@ -9,7 +9,7 @@ const isMobile = ref(window.innerWidth < 768);
 // const toggleMenu = () => {
 //   isOpen.value = !isOpen.value;
 // };
-const route = useRoute();
+
 const router = useRouter();
 function navigateTo(route: string) {
   router.push(route);
