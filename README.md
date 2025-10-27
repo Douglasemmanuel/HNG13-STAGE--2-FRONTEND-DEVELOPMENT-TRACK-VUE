@@ -63,7 +63,7 @@ npm start
 4. **Open in browser**
 
 ```
-https://tickethub-webapp.vercel.app
+https://tickethubwebapp.vercel.app
 ```
 
 ---
